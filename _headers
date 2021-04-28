@@ -1,5 +1,5 @@
 /*
-Content-Security-Policy: connect-src https://empost.eu:302/api data:;frame-src blob:;img-src blob: data:;media-src blob:;object-src blob:;script-src https://cdn.jsdelivr.net/gh/emp-code/ https://cdn.jsdelivr.net/gh/google/brotli@1.0.7/js/decode.min.js https://cdn.jsdelivr.net/gh/jedisct1/libsodium.js@0.7.9/dist/browsers/sodium.js 'unsafe-eval';style-src https://cdn.jsdelivr.net/gh/emp-code/ 'unsafe-inline';base-uri 'none';child-src 'none';default-src 'none';font-src 'none';form-action 'none';frame-ancestors 'none';manifest-src 'none';prefetch-src 'none';worker-src 'none';block-all-mixed-content;
+Content-Security-Policy: connect-src https://empost.eu:302/api data:;frame-src blob:;img-src blob: data:;media-src blob:;object-src blob:;script-src-elem https://cdn.jsdelivr.net/gh/emp-code/ https://cdn.jsdelivr.net/gh/google/brotli@1.0.7/js/decode.min.js https://cdn.jsdelivr.net/gh/jedisct1/libsodium.js@0.7.9/dist/browsers/sodium.js 'unsafe-eval';script-src https://cdn.jsdelivr.net/gh/emp-code/ https://cdn.jsdelivr.net/gh/google/brotli@1.0.7/js/decode.min.js https://cdn.jsdelivr.net/gh/jedisct1/libsodium.js@0.7.9/dist/browsers/sodium.js 'unsafe-eval';style-src-elem https://cdn.jsdelivr.net/gh/emp-code/ 'unsafe-inline';style-src https://cdn.jsdelivr.net/gh/emp-code/ 'unsafe-inline';base-uri 'none';child-src 'none';default-src 'none';font-src 'none';form-action 'none';frame-ancestors 'none';manifest-src 'none';prefetch-src 'none';script-src-attr 'none';style-src-attr 'none';worker-src 'none';block-all-mixed-content;
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 Cross-Origin-Resource-Policy: same-origin
@@ -7,6 +7,7 @@ Link: <https://empost.eu>; rel="canonical"
 Onion-Location: http://empostximalyvi3ytfj2hrydrvwvz3hb3h5s3czer7wafmxaejfc4vad.onion
 Permissions-Policy: clipboard-write=(self),focus-without-user-activation=(self),fullscreen=(self),accelerometer=(),ambient-light-sensor=(),autoplay=(),battery=(),camera=(),ch-device-memory=(),ch-downlink=(),ch-dpr=(),ch-ect=(),ch-lang=(),ch-rtt=(),ch-save-data=(),ch-ua=(),ch-ua-arch=(),ch-ua-full-version=(),ch-ua-mobile=(),ch-ua-model=(),ch-ua-platform=(),ch-ua-platform-version=(),ch-viewport-height=(),ch-viewport-width=(),ch-width=(),clipboard-read=(),conversion-measurement=(),cross-origin-isolated=(),display-capture=(),document-domain=(),encrypted-media=(),execution-while-not-rendered=(),execution-while-out-of-viewport=(),gamepad=(),geolocation=(),gyroscope=(),hid=(),idle-detection=(),interest-cohort=(),magnetometer=(),microphone=(),midi=(),navigation-override=(),otp-credentials=(),payment=(),picture-in-picture=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),speaker-selection=(),sync-xhr=(),trust-token-redemption=(),usb=(),web-share=(),xr-spatial-tracking=()
 Referrer-Policy: no-referrer
-X-DNS-Prefetch-Control: Off
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
 X-Frame-Options: deny
 X-XSS-Protection: 1; mode=block
