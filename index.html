@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='%23b3773b'%3E%3Cpolygon%20points='0,4%200,20%208,12'/%3E%3Cpolygon%20points='24,4%2024,20%2016,12'/%3E%3Cpolygon%20points='2,4%2012,14%2022,4'/%3E%3Cpolygon%20points='12,16%209,13%202,20%2022,20%2015,13'/%3E%3C/svg%3E">
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='%23b4783c'%3E%3Cpolygon%20points='0,4%200,20%208,12'/%3E%3Cpolygon%20points='24,4%2024,20%2016,12'/%3E%3Cpolygon%20points='2,4%2012,14%2022,4'/%3E%3Cpolygon%20points='12,16%209,13%202,20%2022,20%2015,13'/%3E%3C/svg%3E">
 		<link rel="license" href="https://www.gnu.org/licenses/gpl-3.0.html" hreflang="en-US">
-		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/emp-code/aem-client@844779de6efe6d9c9db38888b46d35b3fcc5446a/modern/main.css" integrity="sha384-X7Q873sGdCkS6xST6jrED1tkFp99nIKvD0GyvWGC7m9ue/O7FvGztBsj+vQG6KDs" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/emp-code/aem-client@9af0b77d5df647b7f51b7dd54b1582c15c81238e/modern/main.css" integrity="sha384-cmj+2F3eDjAftf/EnCI5UoZQHEh/rBDekCfR1ry3SnnPWLh84WX2oHGsU0gDH+hn" crossorigin="anonymous">
 
 		<meta name="aem.domain.api" content="empost.eu">
 		<meta name="aem.domain.eml" content="empost.eu">
@@ -12,9 +12,9 @@
 		<meta name="aem.adrslt.nrm" content="4d0061feb6297f0f54e64b7af2f2cf74">
 
 		<meta name="author" content="EMPcode">
-		<meta name="color-scheme" content="dark">
+		<meta name="color-scheme" content="dark light">
 		<meta name="description" content="Private email service powered by All-Ears Mail">
-		<meta name="theme-color" content="#00000a">
+		<meta name="theme-color" content="#001">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>empost.eu</title>
@@ -29,7 +29,7 @@
 				</header>
 
 				<main>
-					<input type="password" id="txt_skey" maxlength="0" pattern="[0-9a-f]{64}" autocomplete="current-password" required autofocus>
+					<input type="password" id="txt_skey" maxlength="0" pattern="[0-9a-f]{64}" required autocomplete="current-password" autofocus>
 					<button type="button" id="btn_enter"></button>
 				</main>
 
@@ -70,15 +70,15 @@
 					<div id="div_write" hidden>
 						<div id="div_write_1">
 							<p class="flex0"><select id="write_from" required></select></p>
-							<p class="flex0"><input type="text" id="write_recv" required placeholder="Receiver" pattern="[0-9a-z]{1,16}|\S+@\S+" list="contact_emails" autocapitalize="off" spellcheck="false" inputmode="email"></p>
-							<p class="flex0"><input type="text" id="write_subj" required placeholder="Subject" autocapitalize="sentences" spellcheck="true"></p>
-							<p class="flex1"><textarea id="write_body" required placeholder="Message" autocapitalize="sentences" spellcheck="true"></textarea></p>
+							<p class="flex0"><input type="text" id="write_recv" pattern="[0-9a-z]{1,16}|\S+@\S+" required autocapitalize="off" inputmode="email" spellcheck="false" placeholder="Receiver" list="contact_emails"></p>
+							<p class="flex0"><input type="text" id="write_subj" required autocapitalize="sentences" spellcheck="true" placeholder="Subject"></p>
+							<p class="flex1"><textarea id="write_body" required autocapitalize="sentences" spellcheck="true" placeholder="Message"></textarea></p>
 
 							<datalist id="contact_emails"></datalist>
 						</div>
 
 						<div id="div_write_2" hidden>
-							<p id="write2_pkey"><input type="text" pattern="[0-9A-Za-z+/]{43}" size="43" maxlength="43" autocomplete="off" placeholder="Public key (enables end-to-end encryption)"></p>
+							<p id="write2_pkey"><input type="text" pattern="[0-9A-Za-z+/]{43}" size="43" minlength="43" maxlength="43" autocomplete="off" placeholder="Public key (enables end-to-end encryption)"></p>
 							<p id="write2_send"><button type="button"><span id="write2_btntxt">Send to</span> <span id="write2_recv"></span></button></p>
 							<hr>
 							<p id="write2_from"></p>
@@ -112,9 +112,9 @@
 						<div id="div_notepad" hidden>
 							<textarea id="txt_notepad" placeholder="Notepad"></textarea>
 							<meter value="0" min="0" max="1" optimum="0" low="0.2" high="0.8"></meter>
-							<p class="grid0">
+							<p>
 								<button type="button" id="btn_notepad_restore">Restore</button>
-								<button type="button" id="btn_notepad_savepad">Save</button>
+								<button type="button" id="btn_notepad_savepad" disabled>Save</button>
 								<button type="button" id="btn_notepad_saveupl">Save as&hellip;</button>
 								<button type="button" id="btn_upload">Upload</button>
 							</p>
@@ -147,7 +147,7 @@
 									<td colspan="4"></td>
 								</tr>
 								<tr>
-									<td><input type="text" id="txt_address_create_normal" size="16" maxlength="15" pattern="[0-9a-z]{1,15}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="new"></td>
+									<td><input type="text" id="txt_address_create_normal" size="16" minlength="1" maxlength="15" pattern="[0-9a-z]{1,15}" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="new"></td>
 									<td colspan="2"><button type="button" id="btn_address_create_normal" autocomplete="off">Register</button></td>
 									<td id="limit_normal"></td>
 								</tr>
@@ -190,27 +190,27 @@
 								<tbody>
 									<tr>
 										<td class="half">0</td>
-										<td><input type="number" id="lim_mib0" min="0" max="255" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_nrm0" min="0" max="31" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_shd0" min="0" max="31" autocomplete="off" disabled required></td>
+										<td><input type="number" id="lim_mib0" min="0" max="255" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_nrm0" min="0" max="31" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_shd0" min="0" max="31" required autocomplete="off" disabled></td>
 									</tr>
 									<tr>
 										<td class="half">1</td>
-										<td><input type="number" id="lim_mib1" min="0" max="255" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_nrm1" min="0" max="31" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_shd1" min="0" max="31" autocomplete="off" disabled required></td>
+										<td><input type="number" id="lim_mib1" min="0" max="255" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_nrm1" min="0" max="31" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_shd1" min="0" max="31" required autocomplete="off" disabled></td>
 									</tr>
 									<tr>
 										<td class="half">2</td>
-										<td><input type="number" id="lim_mib2" min="0" max="255" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_nrm2" min="0" max="31" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_shd2" min="0" max="31" autocomplete="off" disabled required></td>
+										<td><input type="number" id="lim_mib2" min="0" max="255" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_nrm2" min="0" max="31" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_shd2" min="0" max="31" required autocomplete="off" disabled></td>
 									</tr>
 									<tr>
 										<td class="half">3</td>
-										<td><input type="number" id="lim_mib3" min="0" max="255" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_nrm3" min="0" max="31" autocomplete="off" disabled required></td>
-										<td><input type="number" id="lim_shd3" min="0" max="31" autocomplete="off" disabled required></td>
+										<td><input type="number" id="lim_mib3" min="0" max="255" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_nrm3" min="0" max="31" required autocomplete="off" disabled></td>
+										<td><input type="number" id="lim_shd3" min="0" max="31" required autocomplete="off" disabled></td>
 									</tr>
 								</tbody>
 								<tfoot>
@@ -221,16 +221,16 @@
 							</table>
 
 							<p>
-								<input type="text" id="txt_reg" size="64" maxlength="64" pattern="[0-9a-f]{64}" autocomplete="off" required disabled>
+								<input type="text" id="txt_reg" size="64" minlength="64" maxlength="64" pattern="[0-9a-f]{64}" required autocomplete="off" disabled>
 								<button type="button" id="btn_reg" autocomplete="off">Register</button>
 							</p>
 
 							<p>
-								<input type="text" id="txt_sender_hash" autocomplete="off" required size="64" maxlength="64" pattern="[0-9A-Za-z_-]{64}" placeholder="Message-ID" disabled>
-								<input type="text" id="txt_sender_date" autocomplete="off" required placeholder="Date" disabled>
+								<input type="text" id="txt_sender_hash" size="64" minlength="64" maxlength="64" pattern="[0-9A-Za-z_-]{64}" required autocomplete="off" placeholder="Message-ID" disabled>
+								<input type="text" id="txt_sender_date" required autocomplete="off" placeholder="Date" disabled>
 								<button type="button" id="btn_sender" autocomplete="off">Identify</button>
 								<br>
-								<input type="text" id="txt_sender_res" autocomplete="off" size="64" placeholder="Result" readonly>
+								<input type="text" id="txt_sender_res" size="64" autocomplete="off" placeholder="Result" readonly>
 							</p>
 						</div>
 
@@ -268,32 +268,20 @@
 					<button type="button" id="btn_top25" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_sett"/></svg></button>
 				</nav>
 				<article class="mid">
-					<table hidden>
-						<tr>
-							<td id="readmsg_date"><span>&#128336;</span> <time></time></td>
-							<td id="readmsg_greet">&#128188; <span></span></td>
-						</tr>
-						<tr>
-							<td id="readmsg_ip"><span id="readmsg_country" title="Unknown">&#10068;</span> <span></span><span class="sans"></span></td>
-							<td id="readmsg_rdns">&#127760; <span></span></td>
-						</tr>
-						<tr>
-							<td id="readmsg_tls">&#128274; <span></span></td>
-							<td id="readmsg_cert">&#128220; <span></span></td>
-						</tr>
-						<tr>
-							<td id="readmsg_flags">&#128203;<span></span></td>
-							<td id="readmsg_dkim">&#9997; <span></span></td>
-						</tr>
-						<tr>
-							<td id="readmsg_envfrom"></td>
-							<td id="readmsg_envto"></td>
-						</tr>
-						<tr>
-							<td id="readmsg_hdrfrom"></td>
-							<td id="readmsg_hdrto"></td>
-						</tr>
-					</table>
+					<div id="readmsg_info" hidden>
+						<div id="readmsg_date"><span>&#128336;</span> <time></time></div>
+						<div id="readmsg_greet">&#128188; <span></span></div>
+						<div id="readmsg_ip"><span id="readmsg_country" title="Unknown">&#10068;</span> <span></span><span class="sans"></span></div>
+						<div id="readmsg_rdns">&#127760; <span></span></div>
+						<div id="readmsg_tls">&#128274; <span></span></div>
+						<div id="readmsg_cert">&#128220; <span></span></div>
+						<div id="readmsg_flags">&#128203;<span></span></div>
+						<div id="readmsg_dkim">&#9997; <span></span></div>
+						<div id="readmsg_envfrom"></div>
+						<div id="readmsg_envto"></div>
+						<div id="readmsg_hdrfrom"></div>
+						<div id="readmsg_hdrto"></div>
+					</div>
 
 					<h1></h1>
 					<pre></pre>
@@ -301,7 +289,7 @@
 				<nav>
 					<button type="button" id="btn_mdele" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_dele"/></svg></button>
 					<button type="button" id="btn_mprev" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_arrL"/></svg></button>
-					<button type="button" id="btn_bot23" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_cent"/></svg></button>
+					<button type="button" id="btn_leave" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_cent"/></svg></button>
 					<button type="button" id="btn_mnext" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_arrR"/></svg></button>
 					<button type="button" id="btn_bot25" autocomplete="off" disabled><svg viewbox="0 0 96 64"><use xlink:href="#svg_updt"/></svg></button>
 				</nav>
@@ -372,7 +360,7 @@
 
 		<script src="https://cdn.jsdelivr.net/gh/google/brotli@1.0.7/js/decode.min.js" integrity="sha384-D02d+8Zt5n4/7mnD+GctnXcW7NBcKHdgDsl3msmWdkOG3094pdP0ceN/4c/zChml" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/gh/jedisct1/libsodium.js@0.7.9/dist/browsers/sodium.js" integrity="sha384-8Y8Mt8Fo5a34Wpg1Zl9A2KvsGwfL5IcBFgRUP3jd6uEKEHNW4fhAPKXixPH7WUtA" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@844779de6efe6d9c9db38888b46d35b3fcc5446a/all-ears.js" integrity="sha384-aqyW7CC2s6i9ZI0S/5xzxJVSQzpjqI4oC+0eHfxBd8W3Ky+YoWoG3Eq73l6XPj/h" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@844779de6efe6d9c9db38888b46d35b3fcc5446a/modern/main.js" integrity="sha384-dMDgFd9Q2TYv9gQMMgPvIvjtsvcuZanaBC2j3dQBYg2B+F2sc/xLKykHEv78d1qz" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@9af0b77d5df647b7f51b7dd54b1582c15c81238e/all-ears.js" integrity="sha384-8aKYE6KYjEEkzULjSxnesvBgPxzkaCNJCg/eYgds/dMW4zWp3B1EbTCRnZ3m3fuR" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@9af0b77d5df647b7f51b7dd54b1582c15c81238e/modern/main.js" integrity="sha384-8AuLllIb9u3xyxF2vH65gACPSmYNzUQtmTLX3oEcpmAVYg17TYfi6zjcd8lK2a42" crossorigin="anonymous"></script>
 	</body>
 </html>
