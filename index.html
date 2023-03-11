@@ -3,13 +3,18 @@
 	<head>
 		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='%23b4783c'%3E%3Cpolygon%20points='0,4%200,20%208,12'/%3E%3Cpolygon%20points='24,4%2024,20%2016,12'/%3E%3Cpolygon%20points='2,4%2012,14%2022,4'/%3E%3Cpolygon%20points='12,16%209,13%202,20%2022,20%2015,13'/%3E%3C/svg%3E">
 		<link rel="license" href="https://www.gnu.org/licenses/gpl-3.0.html" hreflang="en-US">
-		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/emp-code/aem-client@09536c23ad3846e0c5ad9f8cfba3127db22dc077/modern/main.css" integrity="sha384-mz/AyWz/bQ7CiWRhRauKAlUp0YhrQLNQTfxdDlK3OAo//UqDZngiwXb/Uz2Nq6Wu" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/emp-code/aem-client@94d668a85f58b088a9861c4c086211e152fa647b/modern/main.css" integrity="sha384-xmY8lDuUsl3muGCb18PgiB1u8cAaSTahOm7qXgd/z2cHPiWGI8XtBt3rJBdpQ0Ko" crossorigin="anonymous">
 
 		<meta name="aem.domain.api" content="empost.eu">
 		<meta name="aem.domain.eml" content="empost.eu">
-		<meta name="aem.pubkey.api" content="8158a8f04b3fe44b941bfa7764ad3b899b5fe238149bfd155fd25d653d108305">
-		<meta name="aem.pubkey.sig" content="0ad8a9dc5d1a5697a0baa480681e69f9f0ee1c12d671e9b625b4bd8050c6e316">
-		<meta name="aem.adrslt.nrm" content="4d0061feb6297f0f54e64b7af2f2cf74">
+		<meta name="aem.key.apibox" content="41d53af49d6289c97b6deb5118127ae436da5f6a884291ac81e2981d090f8102">
+		<meta name="aem.key.apisig" content="b104d71d6f0e871227da3ea45827e8dbb628329ae657fa47fe169d355540970b">
+		<meta name="aem.key.dlvsig" content="f989df876b758a50273d899734f908041a35af60bd66f4c04cee5df876cd932d">
+		<meta name="aem.adrslt.nrm" content="d8a99549052e3d602af7e71ec313aff2">
+		<meta name="aem.adrslt.lim" content="3;67108864">
+
+		<meta name="postvault.spk" content="">
+		<meta name="postvault.domain" content="empost.eu">
 
 		<meta name="author" content="EMPcode">
 		<meta name="color-scheme" content="dark light">
@@ -78,7 +83,7 @@
 						</div>
 
 						<div id="div_write_2" hidden>
-							<p id="write2_pkey"><input type="text" pattern="[0-9A-Za-z+/]{43}" size="43" minlength="43" maxlength="43" autocomplete="off" placeholder="Public key (enables end-to-end encryption)"></p>
+							<p id="write2_pkey"><input type="text" pattern="[0-9A-Za-z+/]{43}" size="43" minlength="43" maxlength="43" autocomplete="off" placeholder="Receiver APK (enables E2EE)"></p>
 							<p id="write2_send"><button type="button"><span id="write2_btntxt">Send to</span> <span id="write2_recv"></span></button></p>
 							<hr>
 							<p id="write2_from"></p>
@@ -113,10 +118,10 @@
 							<textarea id="txt_notepad" placeholder="Notepad"></textarea>
 							<meter value="0" min="0" max="1" optimum="0" low="0.2" high="0.8"></meter>
 							<p>
-								<button type="button" id="btn_notepad_restore">Restore</button>
-								<button type="button" id="btn_notepad_savepad" disabled>Save</button>
-								<button type="button" id="btn_notepad_saveupl">Save as&hellip;</button>
-								<button type="button" id="btn_upload">Upload</button>
+								<button type="button" id="btn_notepad_restore" autocomplete="off">Restore</button>
+								<button type="button" id="btn_notepad_savepad" autocomplete="off" disabled>Save</button>
+								<button type="button" id="btn_notepad_saveupl" autocomplete="off">Save as&hellip;</button>
+								<button type="button" id="btn_upload" autocomplete="off">Upload</button>
 							</p>
 						</div>
 
@@ -127,116 +132,134 @@
 					</div>
 
 					<div id="div_tools" hidden>
-						<table id="table_addrs">
-							<thead>
-								<tr>
-									<th>Address</th>
-									<th><abbr title="Accept internal mail">Int</abbr></th>
-									<th><abbr title="Accept email">Ext</abbr></th>
-									<th><abbr title="Store all variants (text/html)">All</abbr></th>
-									<th><abbr title="Store attachments">Att</abbr></th>
-									<th><abbr title="Require secure transport">Sec</abbr></th>
-									<th><abbr title="Store original">Org</abbr></th>
-									<th><abbr title="Delete">Del</abbr></th>
-								</tr>
-							</thead>
-							<tbody id="tbl_addrs">
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="4"></td>
-								</tr>
-								<tr>
-									<td><input type="text" id="txt_address_create_normal" size="16" minlength="1" maxlength="15" pattern="[0-9a-z]{1,15}" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="new"></td>
-									<td colspan="2"><button type="button" id="btn_address_create_normal" autocomplete="off">Register</button></td>
-									<td id="limit_normal"></td>
-								</tr>
-								<tr>
-									<td class="half">Shield</td>
-									<td colspan="2"><button type="button" id="btn_address_create_shield" autocomplete="off">Generate</button></td>
-									<td id="limit_shield"></td>
-								</tr>
-								<tr>
-									<td class="half">Total</td>
-									<td colspan="2"><button type="button" id="btn_address_update" autocomplete="off">Update</button></td>
-									<td id="limit_total"></td>
-								</tr>
-							</tfoot>
-						</table>
-
-						<div id="div_acc" hidden>
-							<p>
-								<input type="text" id="txt_pg" autocomplete="off">
-								<button type="button" id="btn_pg" autocomplete="off">Set greeting</button>
-							</p>
-
-							<hr>
-
-							<p class="half">Check to enable dangerous operations on the next page</p>
-							<p><input type="checkbox" id="chk_lowme"> <span class="half">I want to <b>lower my level</b></span></p>
-							<p><input type="checkbox" id="chk_delme"> <span class="half">I want to <b>delete my account</b></span></p>
-
-							<hr>
-
-							<h1>Administration</h1>
-
-							<table id="tbl_limits">
+						<div>
+							<table id="table_addrs">
 								<thead>
 									<tr>
-										<th><abbr title="Level">Lvl</abbr></th>
-										<th><abbr title="Mebibytes">MiB</abbr></th>
-										<th><abbr title="Normal addresses">Nrm</abbr></th>
-										<th><abbr title="Shield addresses">Shd</abbr></th>
+										<th>Address</th>
+										<th><abbr title="Accept internal mail">Int</abbr></th>
+										<th><abbr title="Accept email">Ext</abbr></th>
+										<th><abbr title="Store all variants (text/html)">All</abbr></th>
+										<th><abbr title="Store attachments">Att</abbr></th>
+										<th><abbr title="Require secure transport">Sec</abbr></th>
+										<th><abbr title="Store original">Org</abbr></th>
+										<th><abbr title="Delete">Del</abbr></th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="half">0</td>
-										<td><input type="number" id="lim_mib0" min="0" max="255" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_nrm0" min="0" max="31" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_shd0" min="0" max="31" required autocomplete="off" disabled></td>
-									</tr>
-									<tr>
-										<td class="half">1</td>
-										<td><input type="number" id="lim_mib1" min="0" max="255" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_nrm1" min="0" max="31" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_shd1" min="0" max="31" required autocomplete="off" disabled></td>
-									</tr>
-									<tr>
-										<td class="half">2</td>
-										<td><input type="number" id="lim_mib2" min="0" max="255" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_nrm2" min="0" max="31" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_shd2" min="0" max="31" required autocomplete="off" disabled></td>
-									</tr>
-									<tr>
-										<td class="half">3</td>
-										<td><input type="number" id="lim_mib3" min="0" max="255" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_nrm3" min="0" max="31" required autocomplete="off" disabled></td>
-										<td><input type="number" id="lim_shd3" min="0" max="31" required autocomplete="off" disabled></td>
-									</tr>
+								<tbody id="tbl_addrs">
 								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="4"><button id="btn_limits" type="button" autocomplete="off">Update limits</button></td>
-									</tr>
-								</tfoot>
 							</table>
 
-							<hr>
+							<table id="table_reg">
+								<tbody>
+									<tr>
+										<td><input type="text" id="txt_address_create_normal" size="16" minlength="1" maxlength="15" pattern="[0-9a-z]{1,15}" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="new"></td>
+										<td colspan="2"><button type="button" id="btn_address_create_normal" autocomplete="off">Register</button></td>
+										<td id="limit_normal"></td>
+									</tr>
+									<tr>
+										<td class="half">Shield</td>
+										<td colspan="2"><button type="button" id="btn_address_create_shield" autocomplete="off">Generate</button></td>
+										<td id="limit_shield"></td>
+									</tr>
+									<tr>
+										<td class="half">Total</td>
+										<td colspan="2"><button type="button" id="btn_address_update" autocomplete="off">Update</button></td>
+										<td id="limit_total"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 
-							<div>
-								<input type="text" id="txt_reg" minlength="64" maxlength="64" pattern="[0-9a-f]{64}" required autocomplete="off" placeholder="Public key (hex)" disabled>
-								<button type="button" id="btn_reg" autocomplete="off">Register</button>
-							</div>
+						<div id="div_acc" hidden>
+							<fieldset id="fs_admin">
+								<legend align="center">Administration</legend>
 
-							<hr>
+								<table id="tbl_limits">
+									<thead>
+										<tr>
+											<th><abbr title="Level">Lvl</abbr></th>
+											<th><abbr title="Mebibytes">MiB</abbr></th>
+											<th><abbr title="Normal addresses">Nrm</abbr></th>
+											<th><abbr title="Shield addresses">Shd</abbr></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="half">0</td>
+											<td><input type="number" id="lim_mib0" min="0" max="255" required autocomplete="off"></td>
+											<td><input type="number" id="lim_nrm0" min="0" max="31" required autocomplete="off"></td>
+											<td><input type="number" id="lim_shd0" min="0" max="31" required autocomplete="off"></td>
+										</tr>
+										<tr>
+											<td class="half">1</td>
+											<td><input type="number" id="lim_mib1" min="0" max="255" required autocomplete="off"></td>
+											<td><input type="number" id="lim_nrm1" min="0" max="31" required autocomplete="off"></td>
+											<td><input type="number" id="lim_shd1" min="0" max="31" required autocomplete="off"></td>
+										</tr>
+										<tr>
+											<td class="half">2</td>
+											<td><input type="number" id="lim_mib2" min="0" max="255" required autocomplete="off"></td>
+											<td><input type="number" id="lim_nrm2" min="0" max="31" required autocomplete="off"></td>
+											<td><input type="number" id="lim_shd2" min="0" max="31" required autocomplete="off"></td>
+										</tr>
+										<tr>
+											<td class="half">3</td>
+											<td><input type="number" id="lim_mib3" min="0" max="255" required autocomplete="off"></td>
+											<td><input type="number" id="lim_nrm3" min="0" max="31" required autocomplete="off"></td>
+											<td><input type="number" id="lim_shd3" min="0" max="31" required autocomplete="off"></td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="4"><button id="btn_limits" type="button" autocomplete="off">Update limits</button></td>
+										</tr>
+									</tfoot>
+								</table>
 
-							<div>
-								<p><input type="text" id="txt_sender_hash" minlength="64" maxlength="64" pattern="[0-9A-Za-z_-]{64}" required autocomplete="off" placeholder="Message-ID" disabled></p>
-								<p><input type="text" id="txt_sender_date" required autocomplete="off" placeholder="Date" disabled></p>
-								<p id="txt_sender_res" class="half">No currently registered account was identified as the sender.</p>
-								<p><button type="button" id="btn_sender" autocomplete="off">Identify</button></p>
-							</div>
+								<hr>
+
+								<div class="center">
+									<input type="text" id="txt_reg" minlength="64" maxlength="64" pattern="[0-9a-f]{64}" required autocomplete="off" placeholder="UPK (hex)">
+									<button type="button" id="btn_reg" autocomplete="off">Register</button>
+								</div>
+
+								<hr>
+
+								<div class="center">
+									<p><input type="text" id="txt_sender_hash" minlength="64" maxlength="64" pattern="[0-9A-Za-z_-]{64}" required autocomplete="off" placeholder="Message-ID"></p>
+									<p><input type="text" id="txt_sender_date" required autocomplete="off" placeholder="Date"></p>
+									<p id="txt_sender_res" class="half"></p>
+									<p><button type="button" id="btn_sender" autocomplete="off">Identify sender</button></p>
+								</div>
+							</fieldset>
+
+							<br>
+
+							<fieldset id="fs_users">
+								<legend align="center">Personal</legend>
+
+								<div class="double">
+									<input type="text" id="txt_pg" autocomplete="off">
+									<button type="button" id="btn_pg" autocomplete="off">Set</button>
+								</div>
+
+								<hr>
+
+								<div class="double">
+									<select id="getapk_addr" required></select>
+									<button id="btn_getapk">Get</button>
+								</div>
+
+								<p id="getapk_result" class="half">(APK for <abbr title="End-to-end encrypted">E2EE</abbr> internal mail)               </p>
+
+								<hr>
+
+								<div class="double">
+									<button id="btn_erame" autocomplete="off" disabled>Empty storage</button>
+									<div><input type="checkbox" id="chk_dng_usr" autocomplete="off"><label for="chk_dng_usr" class="half">⚠</label></div>
+								</div>
+							</fieldset>
 						</div>
 
 						<table id="tbl_accs" hidden>
@@ -393,8 +416,9 @@
 		</svg>
 
 		<script src="https://cdn.jsdelivr.net/gh/google/brotli@1.0.7/js/decode.min.js" integrity="sha384-D02d+8Zt5n4/7mnD+GctnXcW7NBcKHdgDsl3msmWdkOG3094pdP0ceN/4c/zChml" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/gh/jedisct1/libsodium.js@0.7.9/dist/browsers/sodium.js" integrity="sha384-8Y8Mt8Fo5a34Wpg1Zl9A2KvsGwfL5IcBFgRUP3jd6uEKEHNW4fhAPKXixPH7WUtA" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@09536c23ad3846e0c5ad9f8cfba3127db22dc077/all-ears.js" integrity="sha384-EUEpU7jT4bgPZJ5vszrAM3E0Wa4rgHJMmoJeT04GndmhXX9tPAz7bRDE+9NGktP7" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@09536c23ad3846e0c5ad9f8cfba3127db22dc077/modern/main.js" integrity="sha384-2tYNDDzoONf614xu3wRO4GXiyqcoLuchSNp86MsHo3Vqu2SahUBmZCBiCAuvGajJ" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/gh/jedisct1/libsodium.js@0.7.10/dist/browsers/sodium.js" integrity="sha384-GEJ3DUwTjXaoqVwjTaPCJN0gtk+mbUoJ7/QO/6IKrlO+P7QHrV9497Vy5q+JNp7j" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emp-code/PostVault@7a8b8d4bbb7514841e3276bf0698eb694478261f/Client/PostVault.js" integrity="sha384-DR1t+lFck1ucRYVO7RKkdwTv+Byjc4CVO/2dhGEqvZVE4fAW79oK2YX3t9fSEk1R" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@94d668a85f58b088a9861c4c086211e152fa647b/all-ears.js" integrity="sha384-zfKWs6b0T5772o1QM1UCWuLEWSFo+vDvgUWf4MGHe8G40sNeuVu5r0hL10lPB1KR" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emp-code/aem-client@94d668a85f58b088a9861c4c086211e152fa647b/modern/main.js" integrity="sha384-3m4Q6UxpXhaWPx2ROsfmflP4fE9K32/SpDrtWg9ZDXYsLXRMi6myna2lzddA1NAt" crossorigin="anonymous"></script>
 	</body>
 </html>
